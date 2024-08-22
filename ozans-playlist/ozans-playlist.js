@@ -11,7 +11,8 @@
  * @returns {string[]} new playlist with unique entries
  */
 export function removeDuplicates(playlist) {
-  throw new Error('Please implement the removeDuplicates function');
+  
+  return [...new Set(playlist)];
 }
 
 /**
@@ -22,7 +23,11 @@ export function removeDuplicates(playlist) {
  * @returns {boolean} whether the track is in the playlist
  */
 export function hasTrack(playlist, track) {
-  throw new Error('Please implement the hasTrack function');
+
+  const newList = new Set(playlist)
+
+  return newList.has(track)
+
 }
 
 /**
@@ -33,7 +38,9 @@ export function hasTrack(playlist, track) {
  * @returns {string[]} new playlist
  */
 export function addTrack(playlist, track) {
-  throw new Error('Please implement the addTrack function');
+  
+  return [... new Set([...playlist, track])]
+
 }
 
 /**
@@ -44,7 +51,11 @@ export function addTrack(playlist, track) {
  * @returns {string[]} new playlist
  */
 export function deleteTrack(playlist, track) {
-  throw new Error('Please implement the deleteTrack function');
+  
+  const newList = new Set(playlist)
+  newList.delete(track)
+  return [...newList]
+
 }
 
 /**
@@ -53,6 +64,24 @@ export function deleteTrack(playlist, track) {
  * @param {string[]} playlist
  * @returns {string[]} list of artists
  */
+
+// There are a few different ways to iterate over a set.
+// There is a built-in method for dividing a string into substrings.
+// Refer back to the array destructuring concept to recap how to skip an element when destructuring an array.
 export function listArtists(playlist) {
-  throw new Error('Please implement the listArtists function');
+  if (playlist.length === 0) {
+    return [];
+  }
+
+  // set empty
+  const artists = new Set()
+  for (const track of playlist) { 
+    // first iteration track is: 'Onu Alma Beni Al - Sezen Aksu'
+    // then '[artist]' is: 'Onu Alma Beni Al'
+    const [_, artist] = track.split(' - ')
+    // now [artist] that is: 'Onu Alma Beni Al' to added artists (set empty before)
+    artists.add(artist)
+  }
+  
+  return Array.from(artists) 
 }
